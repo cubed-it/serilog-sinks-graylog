@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using Serilog.Events;
@@ -25,22 +26,29 @@ namespace Serilog.Sinks.Graylog.Core.MessageBuilders
 
         public override JObject Build(LogEvent logEvent)
         {
-            Tuple<string, string> excMessageTuple = GetExceptionMessages(logEvent.Exception);
+            Tuple<string, string> excMessageTuple = GetExceptionMessagesDemystify(logEvent.Exception);
             string exceptionDetail = excMessageTuple.Item1;
             string stackTrace = excMessageTuple.Item2;
 
             logEvent.AddOrUpdateProperty(new LogEventProperty("ExceptionSource", new ScalarValue(logEvent.Exception.Source)));
+            logEvent.AddOrUpdateProperty(new LogEventProperty("ExceptionType", new ScalarValue(logEvent.Exception.GetType().FullName)));
             logEvent.AddOrUpdateProperty(new LogEventProperty("ExceptionMessage", new ScalarValue(exceptionDetail)));
             logEvent.AddOrUpdateProperty(new LogEventProperty("StackTrace", new ScalarValue(stackTrace)));
 
             return base.Build(logEvent);
         }
 
+        private Tuple<string, string> GetExceptionMessagesDemystify(Exception ex)
+        {
+           var stacktrace = ex.ToStringDemystified();
+           return new Tuple<string, string>(ex.Message, stacktrace);
+      }
+
         /// <summary>
-        /// Get the message details from all nested exceptions, up to 10 in depth.
-        /// </summary>
-        /// <param name="ex">Exception to get details for</param>
-        private Tuple<string, string> GetExceptionMessages(Exception ex)
+         /// Get the message details from all nested exceptions, up to 10 in depth.
+         /// </summary>
+         /// <param name="ex">Exception to get details for</param>
+         private Tuple<string, string> GetExceptionMessages(Exception ex)
         {
             var exceptionSb = new StringBuilder();
             var stackSb = new StringBuilder();

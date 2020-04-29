@@ -15,4 +15,9 @@
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\anton.volkov\.nuget\packages\serilog\2.4.0\lib\net46\Serilog.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=71746611_002D68ba_002D4c57_002Dabb0_002D99112c3ccf2b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="WhenCreateException_ThenBuildShoulNotThrow" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::27F75D09-070E-4E18-BE81-1433BE8A5209::.NETCoreApp,Version=v2.0::Serilog.Sinks.Graylog.Core.Tests.MessageBuilders.ExceptionMessageBuilderFixture.WhenCreateException_ThenBuildShoulNotThrow&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>
